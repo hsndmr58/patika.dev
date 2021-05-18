@@ -1,4 +1,4 @@
-let counter=0;
+let counter=localStorage.getItem('counter') ? Number(localStorage.getItem('counter')) : 0;
 let counterDOM = document.querySelector("#counter")
 let artDOM = document.querySelector("#art")
 let azlDOM = document.querySelector("#azl")
@@ -14,6 +14,6 @@ function clickEvent () {
         counter--
         counterDOM.innerHTML=counter
     }
-
+    localStorage.setItem('counter',counter)
     
 }
