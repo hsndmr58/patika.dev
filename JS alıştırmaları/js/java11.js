@@ -1,76 +1,71 @@
 let userFormDOM = document.querySelector("#userForm")
-userFormDOM.addEventListener('submit',formHandler)
+userFormDOM.addEventListener('submit', formHandler)
 
-const alertDOM=document.querySelector("#alert")
+const alertDOM = document.querySelector("#alert")
 
-const  alertfunction=(title,message,className="") => `
+
+const alertfunction = (title, message, className = "") => `
 <div class="text-center alert alert-${className} alert-dismissible fade show" role="alert">
   <strong>${title}</strong>${message}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 `
-const Listclear=document.querySelector("#ListeTemizle")
 
-function kontrol(){
-        console.log("çalıştı")
-        if(userListDOM.innerHTML.length>0){
-            Listclear.style.display="block";
-        }
-        else{
-            Listclear.style.display="none";
-        }
-    
-   
-}
-function listeTemizle(){
-userListDOM.innerHTML=""
-kontrol()
-}
 
-function alertdisplay(){
-    alertDOM.style.display="none";
+
+function alertdisplay() {
+    alertDOM.style.display = "none";
+
 }
-function formHandler(event){
-    
+function formHandler(event) {
+
     event.preventDefault()
-    const USER_NAME=document.querySelector("#username")
-    const SCORE=document.querySelector("#score")
-    if(USER_NAME.value && SCORE.value){
-        if(SCORE.value<0 || SCORE.value>100){
-            alertDOM.style.display="block"
-            alertDOM.innerHTML=alertfunction("HATA! "," Notunuz 0 ile 100 arasında olmalı!","warning")
-            setTimeout(alertdisplay,2000)
-            
+    const USER_NAME = document.querySelector("#username")
+    const SCORE = document.querySelector("#score")
+    if (USER_NAME.value && SCORE.value) {
+        if (SCORE.value < 0 || SCORE.value > 100) {
+            alertDOM.style.display = "block"
+            alertDOM.innerHTML = alertfunction("HATA! ", " Notunuz 0 ile 100 arasında olmalı!", "warning")
+            setTimeout(alertdisplay, 2000)
+
         }
-        else{
+        else {
             addItem(USER_NAME.value, SCORE.value)
         }
-        
 
-        
+
+
     }
-    else{
-        alertDOM.style.display="block"
-    alertDOM.innerHTML=alertfunction("HATA! "," Lütfen Alanları Doldurunuz!","danger")
-    setTimeout(alertdisplay,2000)
-    
+    else {
+        alertDOM.style.display = "block"
+        alertDOM.innerHTML = alertfunction("HATA! ", " Lütfen Alanları Doldurunuz!", "danger")
+        setTimeout(alertdisplay, 2000)
+
     }
-    USER_NAME.value=""
-    SCORE.value=""
-    
+    USER_NAME.value = ""
+    SCORE.value = ""
+
 }
-let userListDOM=document.querySelector("#userList")
-
-const addItem= (userName,score) => {
-    let liDOM=document.createElement('li')
-    liDOM.innerHTML=`
-    ${userName}
-    <span class="badge bg-primary rounded-pill"> ${score}</span>
+let userListDOM = document.querySelector("#userList")
+let liID = 0;
+const addItem = (userName, score) => {
+    let liDOM = document.createElement('li')
+    liDOM.innerHTML = `
+    <div style="width:33%">${userName}</div>
+    <span class="badge ms-2 bg-primary rounded-pill"> ${score}</span><button onclick="listedensil(${liID})" id="Lb${liID}" type="submit" class="btn btn-danger ">sil</button>
     `
     liDOM.classList.add(
-        "list-group-item","d-flex","justify-content-between","align-items-center"
+        "list-group-item", "d-flex", "justify-content-between", "align-items-center"
     )
+    liDOM.id = `Ls${liID}`
     userListDOM.append(liDOM)
-    kontrol()
 
+    liID++
+
+}
+
+function listedensil(liID) {
+    let LsID = document.querySelector(`#Ls${liID}`)
+    LsID.parentNode.removeChild(LsID)
+  
 }

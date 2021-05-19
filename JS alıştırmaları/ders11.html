@@ -10,32 +10,43 @@
 </head>
 
 <body>
+
   <div id="alert"></div>
   <div class="container mt-5">
     <div class="row">
       <div class="col-sm-8 offset-sm-2">
         <form id="userForm">
           <div class="mb-3">
-            <label class="form-label" for="username">Kullanıcı Adı:</label>
+            <label class="form-label" for="username"><b> İsim Soyisim</b></label>
             <input class="form-control" type="text" name="username" id="username">
           </div>
           <div class="mb-3">
-            <label class="form-label" for="score">Not Bilgisi:</label>
+            <label class="form-label" for="score"> <b> Not Bilgisi</b></label>
             <input class="form-control" type="number" name="score" id="score">
           </div>
           <div class="mb-3">
-            <button type="submit" class="btn btn-success">Gönder</button>
+            <button type="submit" class="btn btn-success me-4">Gönder</button>
             <button type="reset" class="btn btn-warning">Temizle</button>
           </div>
         </form>
+        <hr>
       </div>
       <div class="col-sm-8 offset-sm-2 mt-4">
         <ul class="list-group" id="userList">
           
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong clas style="width: 33%;" >İsim Soyisim</strong>
+            <strong>Puan</strong>
+            <strong class="me-3">Sil</strong>
+          </li>
+    
         </ul>
+        <ul class="list-group" id="userList">
+
+        </ul>
+
         
-          <button id="ListeTemizle" onclick="listeTemizle()" class="btn btn-danger mt-4" style="display: none;" >Liste Temizle</button>
-        
+
       </div>
     </div>
   </div>
