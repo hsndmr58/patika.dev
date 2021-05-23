@@ -5,12 +5,9 @@ const ulDOM=document.querySelector("#list")
 keys =Object.keys(localStorage)
 let SListe=[]
 keys.forEach(value => {
-
     SListe.push(value.slice(5))
-    
-    
-
 });
+let cont=0;
 SListe.sort(function(a, b){return a - b});
 function formHandler(event){
     event.preventDefault()
@@ -28,13 +25,12 @@ function formHandler(event){
         }
         newElement(TASK.value)
         $(".success").toast("show");
-        localStorage.setItem(`items${addItemControl}`,JSON.stringify(loIDNOT))
+        localStorage.setItem(`items${addItemControl+cont}`,JSON.stringify(loIDNOT))
         loIDNOT=[];
-        location.reload(true)
+        cont++
+        //location.reload(true)
         
-    }
-
-    
+    }    
     TASK.value = ""
 }
 
@@ -52,20 +48,17 @@ const newElement = not =>{
     let eklenecek=`
     <li onclick="listechecked(${liID})" class="d-flex justify-content-between" id="Ls${liID}"><span class="mt-3 mb-2">${not}</span><button onclick="listedensil(${liID})" id="Lb${liID}" type="submit" class="sl-btn"></button></li>
     `
-    loIDNOT={id:liID,nt:not}
+    loIDNOT={id:liID+cont,nt:not}
     
     ulDOM.innerHTML=ulDOM.innerHTML+eklenecek
     
     
 }
-
 function listedensil(liID) {
     let LsID = document.querySelector(`#Ls${liID}`)
     LsID.parentNode.removeChild(LsID)
     localStorage.removeItem(`items${liID}`)
-    $(".warning").toast("show")
-
-  
+    $(".warning").toast("show")  
 }
 
 
